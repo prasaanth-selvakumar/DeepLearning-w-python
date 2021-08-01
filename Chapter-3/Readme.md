@@ -80,6 +80,8 @@ The dataset contains 50k polarised movie reviews. 25k positive and 25k negative 
 
 
 ##  Multiclass classification - problem 2 
+file: Reuters_text_classification_basic.py  
+
 ### Reuters News wires dataset
 This dataset contains 46 different categories with atleast 10 examples per category.
 
@@ -107,5 +109,37 @@ This dataset contains 46 different categories with atleast 10 examples per categ
 #### Additional findings 
  - both approaches don;t have a significant performance difference 
  - Overall accuracy we get is 0.8 which is way better than the baseline in this case 
- - employing embeddings should take up the performance 
+ - employing embeddings should take up the performance
+ - If we are using the predicted values we may have to use argmax on the results 
+
+
+## Regression Problem - Problem 3
+
+### Boston House Pricing Dataset 
+This is a small dataset contains about 600 examples overall. Small datasets are susceptible to overfitting.
+There are multiple features that vary from 1 - 10 from variables that vary from 1 - 1000. 
+
+#### Mitigating Overfitting 
+- As mentioned earlier smaller datasets are more susceptible to over fitting
+- Reducing the size of the architecture used will reduce the chances of overfitting
+
+#### K Fold cross validation 
+- When the amount of data we have is less the, using holdout set may not be as effective 
+- So a better way to track performance would be by using k fold cross validation 
+- This splits the data into k parts and evaluates using 1 part and trains on k-1 parts of the dataset
+
+#### Activation Function for regression
+- Not using an activation in a layer would default to Linear Activation 
+- So we have 1 neuron in the final layer with no activation 
+
+#### Loss for Regressison 
+- We use MSE - mean squared error as the loss function for regression 
+- Mean Absolute error can be tracked for checking metrics, this gives a more realistic estimate of the difference than MSE 
+
+
+#### Problem due to data scale 
+- If all the variables have different scales, the model will be able to adapt to this. But it is an unnecessary load training
+- So all the input features will be normalized
+- subtracting the values by the mean and dividing it by the standard deviation
+- One more important thing to keep in mind is that the mean and the std_dev of the training data should only be used 
 
