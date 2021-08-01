@@ -60,8 +60,11 @@ history = model.fit(train_data_preprocessed, train_labels,
                     epochs=train_epochs,
                     batch_size=512)
 
+
 history_dict = history.history
 epochs_vals = range(train_epochs)
+
+
 # Plotting the training curves
 plt.plot(epochs_vals, history_dict["loss"], 'r', label='training_loss')
 plt.plot(epochs_vals, history_dict["val_loss"], 'g', label='validation_loss')
@@ -75,3 +78,8 @@ plt.plot(epochs_vals, history_dict["val_accuracy"], 'g', label='validation_accur
 plt.title("Accuracy Over Epochs")
 plt.legend()
 plt.show()
+
+
+model.evaluate(test_data_preprocessed,test_labels)
+
+model.predict(test_data_preprocessed)

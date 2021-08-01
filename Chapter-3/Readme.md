@@ -1,4 +1,7 @@
-### Classifying Movie Reviews - Problem 1
+## Classifying Movie Reviews - Problem 1
+file : IMBD_basic_Classifier.py  
+
+###IMDB_dataset  
 The dataset contains 50k polarised movie reviews. 25k positive and 25k negative reviews .
 #### Why should we split data into train and test?
 - Models that perform well on the test data needn't perform well on the training data 
@@ -67,4 +70,76 @@ The dataset contains 50k polarised movie reviews. 25k positive and 25k negative 
 - Epochs - no of times the model has to iterate over the training data 
 - The training and validation cures have been plot to understand if the model is generalizing or just memorising
 - We can observe that the model after 3 epochs starts to overfit 
+
+#### Evaluation and prediction
+- The performance of the model can be evaluated and predicted using test data 
+- This architecture achieves an accuracy 85 %
+
+##### Training and validation graphs 
+ - this can be made into a package, will be useful while training all models 
+
+
+##  Multiclass classification - problem 2 
+file: Reuters_text_classification_basic.py  
+
+### Reuters News wires dataset
+This dataset contains 46 different categories with atleast 10 examples per category.
+
+#### Pulling data
+ - using keras datasets
+ - Train Data has about 9k records 
+ - Test Data has about 2.2k records 
+
+#### Converting Target
+- There are two ways we can approach multi class classification
+- One hot encode the target and use categorical_crossentropy as the loss 
+- Use the targets as is and use sparse_categorical_crossentropy as the loss 
+- Both use softmax in the final layer to identify which class has the highest probability
+- Using either wouldnot change the results
+
+#### Train Val Split
+- Instead of spliting the data mannual 
+- We can leverage the val_split argument in fit to get a sense of validation results 
+
+#### Architecture 
+- The one employed for the last module can't be used here 
+- Because the last hidden layer has only 16 units this will compress the information contained when we try to predict the outcome on 46 classes 
+- So all the previous neurons should have a higher number of hidden units or the point in the model where this doesn't happen becomes an information bottleneck 
+
+#### Additional findings 
+ - both approaches don;t have a significant performance difference 
+ - Overall accuracy we get is 0.8 which is way better than the baseline in this case 
+ - employing embeddings should take up the performance
+ - If we are using the predicted values we may have to use argmax on the results 
+
+
+## Regression Problem - Problem 3
+
+### Boston House Pricing Dataset 
+This is a small dataset contains about 600 examples overall. Small datasets are susceptible to overfitting.
+There are multiple features that vary from 1 - 10 from variables that vary from 1 - 1000. 
+
+#### Mitigating Overfitting 
+- As mentioned earlier smaller datasets are more susceptible to over fitting
+- Reducing the size of the architecture used will reduce the chances of overfitting
+
+#### K Fold cross validation 
+- When the amount of data we have is less the, using holdout set may not be as effective 
+- So a better way to track performance would be by using k fold cross validation 
+- This splits the data into k parts and evaluates using 1 part and trains on k-1 parts of the dataset
+
+#### Activation Function for regression
+- Not using an activation in a layer would default to Linear Activation 
+- So we have 1 neuron in the final layer with no activation 
+
+#### Loss for Regressison 
+- We use MSE - mean squared error as the loss function for regression 
+- Mean Absolute error can be tracked for checking metrics, this gives a more realistic estimate of the difference than MSE 
+
+
+#### Problem due to data scale 
+- If all the variables have different scales, the model will be able to adapt to this. But it is an unnecessary load training
+- So all the input features will be normalized
+- subtracting the values by the mean and dividing it by the standard deviation
+- One more important thing to keep in mind is that the mean and the std_dev of the training data should only be used 
 
