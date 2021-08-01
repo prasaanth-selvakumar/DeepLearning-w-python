@@ -1,4 +1,7 @@
-### Classifying Movie Reviews - Problem 1
+## Classifying Movie Reviews - Problem 1
+file : IMBD_basic_Classifier.py  
+
+IMDB_dataset
 The dataset contains 50k polarised movie reviews. 25k positive and 25k negative reviews .
 #### Why should we split data into train and test?
 - Models that perform well on the test data needn't perform well on the training data 
